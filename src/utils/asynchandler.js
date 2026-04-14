@@ -4,7 +4,7 @@ const asyncHandler = (requestHandler) => {
         .catch((err) => next(err));
     };
 };
-
+ // if we are using default then {} this should be used 
 export default asyncHandler;
 // this is created beacuse of the easier to handle 
 // const asyncHandler =(fn) => async(req,res,next)=>{
