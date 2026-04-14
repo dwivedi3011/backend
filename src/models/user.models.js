@@ -50,7 +50,7 @@ import bcrypt from "bcrypt";
         type:String
     }
   
- },
+ }, 
    {
         timestamps:true
     }
@@ -58,7 +58,7 @@ import bcrypt from "bcrypt";
 // this will run before saving the user to the database
 userSchema.pre("save",async function (next){
     if(!this.isModified("password")) return next();
-    this.password=bcrypt.hash(this.password,10)
+    this.password=await bcrypt.hash(this.password,10)
     next()
 })
 // userschema ke andr bhut saare methods add kar skte hai .... abhi hum use krnge ki password sahi hai ki nhhi  
@@ -90,4 +90,6 @@ userSchema.methods.generateRefreshToken=function(){
         }
     )
  }
- export const user= mongoose.model("User",userSchema);
+
+export const User= mongoose.model("User",userSchema);
+ //export default User;
