@@ -15,7 +15,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // create user object   - from the db
 // remove password and the refresh token field from response
 // check for the user creation 
-
+console.log("Register API hit");
   // this is the data from the frontend 
     const { fullName, email, userName, password } = req.body;
 
@@ -27,7 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 }   
 // this is for the unique user
-  const existedUser=User.find({
+  const existedUser=await User.findOne({
     $or:[{userName},{email}]
   })
 
@@ -35,8 +35,8 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409,"User is already existed")
   }
   // this is for the avtar or cover image part
-  const avatarLocalPath=req.files?.avatar[0]?.path;
-  const coverImageLocalPath=req.files?.coverImage[0]?.path
+  const avatarLocalPath=req.files?.avatar?.[0]?.path;
+  const coverImageLocalPath=req.files?.coverImage?.[0]?.path;
   // check avtar is uploaded or not 
   if(!avatarLocalPath){
     throw new ApiError(409,"Avatar required");
@@ -64,8 +64,6 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(201).json(
       new ApiResponse(200,createdUser,"User registered Successfully")
     )
-    console.log("email:", email);
-    console.log("userName:",userName);
 })
 
 export { registerUser};

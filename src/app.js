@@ -8,7 +8,7 @@ app.use(cors({
 })
 )
 app.use(express.json({limit:"16kb"}))
-app.use(express.urlencoded())  // if any space comes in betwween 
+app.use(express.urlencoded({extended:true}))  // if any space comes in betwween 
 app.use(express.static("public"))
 app.use(cookieParser())
 
