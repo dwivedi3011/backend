@@ -1,5 +1,5 @@
-import { ApiError } from "../utils/ApiError";
-import {asyncHanddler} from "../utils/asynchandler";  // {} this is used because default is there in the export 
+import ApiError from "../utils/ApiError.js";
+import asyncHandler from "./utils/asynchandler.js";  // {} this is used because default is there in the export 
 import jwt from "jsonwebtoken";
 import {User} from "..models/user.models.js"
 export const verifyJWT=asyncHanddler(async(req,resizeBy,next)=>{

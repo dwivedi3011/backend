@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { registerUser,loginUser, logoutUser } from "../controllers/user.controllers.js";
 import {upload} from "../middleware/multer.js"
+import { verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = Router()
 // ab yha routeer kese likhte hai woh pta lagega 

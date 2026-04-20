@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // create user object   - from the db
 // remove password and the refresh token field from response
 // check for the user creation 
-console.log("Register API hit");
+
   // this is the data from the frontend 
     const { fullName, email, userName, password } = req.body;
 
@@ -69,7 +69,7 @@ console.log("Register API hit");
         avatar:avatar.url,
         coverImage:coverImage?.url || ""   
     })
-    // remove password
+    // remove password and the refresh token
     const createdUser = await User.findById(user._id).select("-password -refreshToken")
     if(!createdUser){
       throw new ApiError(500,"Server error, while regestering the user ")
@@ -78,9 +78,9 @@ console.log("Register API hit");
       new ApiResponse(200,createdUser,"User registered Successfully")
     )
 })
-const loginUser=asyncHandle(async (req,res) => {
+const loginUser=asyncHandler(async (req,res) => {
   const{userName,email,password}=req.body;
-  if(!userName ||!email){
+  if(!userName && !email){
     throw new ApiError(400,"username or password reqiuered")
     
   }
